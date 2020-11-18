@@ -253,8 +253,9 @@ class CommandLineApp():
             self._action.newColorSelectionValidator(
                 arguments.color_channel
                 )
-            self._action.newInputList(arguments.files)
-
+            self._action.newInputList(
+                [item for elem in arguments.files for item in elem]
+                )
 
     def run(self):
         """This method executes action code.
@@ -328,7 +329,7 @@ If resolution units are not supplied this option is ignored. Default value is \
 process. Supported values are \'red\', \'green\' and \'blue\'.')
     program.add_argument(
             'files',
-            action = 'extend',
+            action='append',
             metavar='FILE_LIST',
             type=str,
             nargs='+',
